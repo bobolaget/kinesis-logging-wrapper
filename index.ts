@@ -1,9 +1,15 @@
-import {Kinesis, PutRecordCommandOutput} from '@aws-sdk/client-kinesis';
+import {Kinesis, PutRecordCommandOutput, KinesisClientConfig} from '@aws-sdk/client-kinesis';
 
-const kinesisConfig = {};
-const kinesis = new Kinesis(kinesisConfig);
+const defaultKinesisConfig = {};
+let kinesis = new Kinesis(defaultKinesisConfig);
 
 export type logLevel = 'error' | 'warn' | 'info' | 'verbose' | 'debug';
+
+/** set up kinesis with custom configuration
+ */
+export function kinesisConfig(kinesisConfig: KinesisClientConfig): void{
+  kinesis = new Kinesis(kinesisConfig);
+}
 
 /** send a log message to AWS kinesis stream
  */
