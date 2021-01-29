@@ -1,0 +1,47 @@
+{
+  "name": "kinesis-logging-wrapper",
+  "version": "1.0.0",
+  "description": "kinesis logging wrapper",
+  "author": {
+    "name": "Bobolaget Dev Team",
+    "url": "https://www.bobolaget.com/"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bobolaget/kinesis-logging-wrapper"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "main": "dist/cjs/index.js",
+  "module": "./dist/es/index.js",
+  "types": "./types/index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "clean": "yarn remove-definitions && yarn remove-dist",
+    "prepublishOnly": "yarn build",
+    "pretest": "yarn build:cjs",
+    "remove-definitions": "rimraf ./types",
+    "remove-dist": "rimraf ./dist",
+    "test": "exit 0",
+    "build:cjs": "tsc -p tsconfig.json",
+    "build:es": "tsc -p tsconfig.es.json",
+    "build": "yarn build:cjs && yarn build:es",
+    "postbuild": "downlevel-dts types types/ts3.4"
+  },
+  "typesVersions": {
+    "<3.9": {
+      "types/*": [
+        "types/ts3.4/*"
+      ]
+    }
+  },
+  "dependencies": {
+    "@aws-sdk/client-kinesis": "^3.4.0",
+    "@types/node": "12.7.5",
+    "downlevel-dts": "^0.7.0",
+    "ts-node": "^8.10.1",
+    "typescript": "~4.1.2"
+  }
+}

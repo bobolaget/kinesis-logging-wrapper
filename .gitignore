@@ -1,0 +1,5 @@
+yarn-error.log
+package-log.json
+/node_modules
+/dist/
+/types/
